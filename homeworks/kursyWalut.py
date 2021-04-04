@@ -2,30 +2,29 @@ import requests
 import time
 import json
 
-url = 'https://api.ratesapi.io/api/latest?base=EUR&symbols=PLN'
+url = ('https://api.ratesapi.io/api/latest?base=EUR&symbols=PLN')
 
-
-def currency():
+def actualEuroRate():
     try:
-        r = requests.get(url)
-        data = r.text
-        parse = json.loads(data)
-        print('Kurs Euro: ' + str(parse['rates']['PLN']))
+        response = requests.get(url)
+        currency = response.text
+        parse = json.loads(currency)
+        print('Aktualny kurs Euro: ' + str(parse['rates']['PLN']))
     except requests.exceptions.Timeout:
-        print('Serwis chwilowo niedostępny')
+        print('UUUUUU!Trwało to za długo')
 
 
-def wrapper():
-    response = requests.get(url)
-    req_time = response.headers.get('Date')
-    responseTime = (response.elapsed.total_seconds() * 1000)
+def requestResponseTime():
+    response_2 = requests.get(url)
+    responseTime = (response_2.elapsed.total_seconds() * 1000)
+    responseHeadrs = response_2.headers.get('Date')
 
-    print('Data i godzina: ' + str(req_time))
+    print('Data i godzina: ' + str(responseHeadrs))
     print('Czas wykonania zapytania: ' + str(round(responseTime)) + ' ms')
-    print('----------------------')
+    print('--------------------------------------')
 
 
 while True:
-    currency()
-    wrapper()
+    actualEuroRate()
+    requestResponseTime()
     time.sleep(15)
