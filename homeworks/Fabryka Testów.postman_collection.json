@@ -1,0 +1,412 @@
+{
+	"info": {
+		"_postman_id": "2b247b7d-2eb6-4cc1-96cc-dce2dfa192e1",
+		"name": "Fabryka Testów",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Posts",
+			"item": [
+				{
+					"name": "Get posts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 1000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body is json and have body\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"    pm.response.to.be.withBody;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{postsUrl}}",
+							"host": [
+								"{{postsUrl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create new post",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let post_Number = pm.environment.get(\"postNumber\");\r",
+									"pm.environment.set(\"postNumber\", parseInt(post_Number) + 1);\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 1000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body is json and have body\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"    pm.response.to.be.withBody;\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "[\r\n    {\r\n        \"userId\": {{userId}},\r\n        \"id\": {{postNumber}},\r\n        \"title\": \"New post created by user 30\",\r\n        \"body\": \"Body of new post\"\r\n    }\r\n]    ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{postsUrl}}",
+							"host": [
+								"{{postsUrl}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get again posts",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 1000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body is json and have body\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.have.jsonBody()\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{postsUrl}}{{postNumber}}",
+							"host": [
+								"{{postsUrl}}{{postNumber}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete created post",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 1000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body is json and have body\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.not.have.jsonBody();\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{postsUrl}}{{postNumber}}",
+							"host": [
+								"{{postsUrl}}{{postNumber}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get again posts 2",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 1000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body is json and have body\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"    pm.response.to.be.withBody;\r",
+									"    pm.response.to.have.jsonBody()\r",
+									"});\r",
+									"\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{postsUrl}}{{postNumber}}",
+							"host": [
+								"{{postsUrl}}{{postNumber}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Comments",
+			"item": [
+				{
+					"name": "Get comments",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {\r",
+									"    pm.response.to.have.status(200);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 1000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body is json and have body\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"    pm.response.to.be.withBody;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{commentsURL}}",
+							"host": [
+								"{{commentsURL}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create new comment",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"let post_Number = pm.environment.get(\"commentsId\");\r",
+									"pm.environment.set(\"commentsId\", parseInt(post_Number) + 1);"
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 201\", function () {\r",
+									"    pm.response.to.have.status(201);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 1000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body is json and have body\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"    pm.response.to.be.withBody;\r",
+									"});\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"postId\": 100,\r\n        \"id\": {{commentsId}},\r\n        \"name\": \"FL\",\r\n        \"email\": \"testy@testy.pl\",\r\n        \"body\": \"Zadanie domowe moduł 7\"\r\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{postsUrl}}/{{postNumber}}/comments",
+							"host": [
+								"{{postsUrl}}"
+							],
+							"path": [
+								"{{postNumber}}",
+								"comments"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get again comments",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 1000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body is json and have body\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"    pm.response.to.be.withBody;\r",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{postsUrl}}/{{postNumber}}/comments/{{commentsId}}",
+							"host": [
+								"{{postsUrl}}"
+							],
+							"path": [
+								"{{postNumber}}",
+								"comments",
+								"{{commentsId}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete created comments",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 404\", function () {\r",
+									"    pm.response.to.have.status(404);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response time is less than 1000ms\", function () {\r",
+									"    pm.expect(pm.response.responseTime).to.be.below(1000);\r",
+									"});\r",
+									"\r",
+									"pm.test(\"Response body is json and have body\", function () {\r",
+									"    pm.response.to.be.json;\r",
+									"    pm.response.to.be.withBody;\r",
+									"});\r",
+									"\r",
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{postsUrl}}/{{postNumber}}/comments/{{commentsId}}",
+							"host": [
+								"{{postsUrl}}"
+							],
+							"path": [
+								"{{postNumber}}",
+								"comments",
+								"{{commentsId}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
