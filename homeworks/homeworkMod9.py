@@ -2,8 +2,9 @@ import unittest
 from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from settings import testSettings
-from pages import datepickerPage, basicAuth, form, keyPress, dragAndDrop
+from pages import datepickerPage, basicAuth, form, keyPress, dragAndDrop, statusCodes, iFrame
 from time import sleep
+
 
 
 
@@ -53,6 +54,41 @@ class Tests(unittest.TestCase):
         self.assertTrue(dragAndDrop.dragAndDropContentVisibility(self.driver))
         self.assertTrue(dragAndDrop.dragAndDropSquareA(self.driver))
 
+    def test6_statusCode200_test(self):
+        statusCodes.statusCodesHeader(self.driver)
+        self.assertTrue(statusCodes.codesContentVisibility(self.driver))
+        statusCodes.clickCode200(self.driver)
+        self.assertTrue(statusCodes.pagesStatus200Check(self.driver))
 
+    def test7_statusCode305_test(self):
+        statusCodes.statusCodesHeader(self.driver)
+        self.assertTrue(statusCodes.codesContentVisibility(self.driver))
+        statusCodes.clickCode305(self.driver)
+        self.assertTrue(statusCodes.pagesStatus305Check(self.driver))
 
+    def test8_statusCode404_test(self):
+        statusCodes.statusCodesHeader(self.driver)
+        self.assertTrue(statusCodes.codesContentVisibility(self.driver))
+        statusCodes.clickCode404(self.driver)
+        self.assertTrue(statusCodes.pagesStatus404Check(self.driver))
+
+    def test9_statusCode500_test(self):
+        statusCodes.statusCodesHeader(self.driver)
+        self.assertTrue(statusCodes.codesContentVisibility(self.driver))
+        statusCodes.clickCode500(self.driver)
+        self.assertTrue(statusCodes.pagesStatus500Check(self.driver))
+
+    def test10_iFrame1_test(self):
+        iFrame.iFrameHeader(self.driver)
+        self.assertTrue(iFrame.iFrameContent(self.driver))
+        iFrame.clickButtonOne(self.driver)
+        self.assertTrue(iFrame.checkMessage(self.driver))
+
+    def test11_iFrame2_test(self):
+        iFrame.iFrameHeader(self.driver)
+        self.assertTrue(iFrame.iFrameContent(self.driver))
+        sleep(5)
+        iFrame.clickButtonTwo(self.driver)
+        sleep(5)
+        self.assertTrue(iFrame.checkMessage(self.driver))
 
