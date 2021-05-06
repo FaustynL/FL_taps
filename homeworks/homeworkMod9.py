@@ -87,8 +87,6 @@ class Tests(unittest.TestCase):
     def test11_iFrame2_test(self):
         iFrame.iFrameHeader(self.driver)
         self.assertTrue(iFrame.iFrameContent(self.driver))
-        sleep(5)
         iFrame.clickButtonTwo(self.driver)
-        sleep(5)
         self.assertTrue(iFrame.checkMessage(self.driver))
 
