@@ -3,7 +3,7 @@ from selenium import webdriver
 from webdriver_manager.chrome import ChromeDriverManager
 from settings import testSettings
 from pages import datepickerPage, basicAuth, form, keyPress, dragAndDrop, statusCodes, iFrame
-from time import sleep
+
 
 
 
