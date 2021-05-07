@@ -1,6 +1,6 @@
 from helpers.support_functions import *
 from selenium.webdriver.common.action_chains import ActionChains
-from settings.testSettings import driver
+
 
 drag_and_drop_tab = 'draganddrop-header'
 drag_and_drop_content = 'draganddrop-content'

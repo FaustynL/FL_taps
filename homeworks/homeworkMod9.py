@@ -1,6 +1,5 @@
 import unittest
 from selenium import webdriver
-from webdriver_manager.chrome import ChromeDriverManager
 from settings import testSettings
 from pages import datepickerPage, basicAuth, form, keyPress, dragAndDrop, statusCodes, iFrame
 
@@ -10,7 +9,7 @@ from pages import datepickerPage, basicAuth, form, keyPress, dragAndDrop, status
 
 class Tests(unittest.TestCase):
     def setUp(self):
-        self.driver = webdriver.Chrome(ChromeDriverManager().install())
+        self.driver = webdriver.Chrome()
         self.url = testSettings.pageUrl
         self.driver.get(self.url)
         self.driver.maximize_window()
@@ -90,3 +89,5 @@ class Tests(unittest.TestCase):
         iFrame.clickButtonTwo(self.driver)
         self.assertTrue(iFrame.checkMessage(self.driver))
 
+if __name__ == '__main__':
+    unittest.main()
