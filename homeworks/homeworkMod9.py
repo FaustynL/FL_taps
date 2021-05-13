@@ -2,6 +2,7 @@ import unittest
 from selenium import webdriver
 from settings import testSettings
 from pages import datepickerPage, basicAuth, form, keyPress, dragAndDrop, statusCodes, iFrame
+from time import sleep
 
 
 
@@ -15,6 +16,7 @@ class Tests(unittest.TestCase):
         self.driver.maximize_window()
 
     def tearDown(self):
+        sleep(3600)
         self.driver.quit()
 
     def test1_datepickerPage_test(self):
@@ -51,7 +53,8 @@ class Tests(unittest.TestCase):
     def test5_draganddrop_test(self):
         dragAndDrop.dragAndDropHeader(self.driver)
         self.assertTrue(dragAndDrop.dragAndDropContentVisibility(self.driver))
-        self.assertTrue(dragAndDrop.dragAndDropSquareA(self.driver))
+        self.assertTrue(dragAndDrop.drag_and_drop_helper(self.driver))
+
 
     def test6_statusCode200_test(self):
         statusCodes.statusCodesHeader(self.driver)
